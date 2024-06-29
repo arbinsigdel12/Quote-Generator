@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .quote-box {
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quote-box text-center">
+    <h1>Random Quote Generator</h1>
+    <p id="quote" class="mt-4">Press the button to generate a quote!</p>
+    <button class="btn btn-primary mt-3" onclick="generateQuote()">Generate Quote</button>
+</div>
+
+<script>
+    function generateQuote() {
+        fetch('/quote')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('quote').innerText = data.quote;
+            })
+            .catch(error => {
+                document.getElementById('quote').innerText = "Could not fetch a quote at this time, please try again later.";
+            });
+    }
+</script>
+
+</body>
+</html>
